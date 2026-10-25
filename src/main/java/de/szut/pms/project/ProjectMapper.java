@@ -10,6 +10,7 @@ public class ProjectMapper {
 
     public ProjectDto toDto(Project project){
         return new ProjectDto(
+                project.getId(),
                 project.getProjectName(),
                 project.getStartDate(),
                 project.getEndDate(),
