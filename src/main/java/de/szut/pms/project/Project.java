@@ -20,6 +20,9 @@ public class Project {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "lead", nullable = false)
+    private Long projectLead;
+    
     @OneToMany(mappedBy="project",fetch=FetchType.LAZY)
     private List<ProjectEmployee> projectemployees = new ArrayList<>();
 
@@ -32,7 +35,9 @@ public class Project {
     @Column(name = "end_date", nullable = false)
     private LocalDateTime endDate;
 
+    @Column(name = "customer", nullable = false)
     private Long customerId;
 
+    @Column(name = "description")
     private String description;
 }
