@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 
 @RestController
@@ -27,5 +28,10 @@ public class ProjectController {
                 .toUri();
 
         return ResponseEntity.created(location).body(created);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ProjectDto>> getAll(){
+        return ResponseEntity.ok(service.findAll());
     }
 }

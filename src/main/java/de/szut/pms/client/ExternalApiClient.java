@@ -1,4 +1,3 @@
-
 package de.szut.pms.client;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,36 +17,37 @@ public class ExternalApiClient {
                 .build();
     }
 
-    public String getEmployees(String token) {
+    private String getCurrentToken() {
+        var authentication = (JwtAuthenticationToken)
+                SecurityContextHolder.getContext().getAuthentication();
+
+        return authentication.getToken().getTokenValue();
+    }
+
+    public String getEmployees() {
         return webClient.get()
                 .uri("/employees")
-                .headers(h -> h.setBearerAuth(token))
+                .headers(h -> h.setBearerAuth(getCurrentToken()))
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
     }
 
-    public String getEmployeeById(Long id, String token) {
+    public String getEmployeeById(Long id) {
         return webClient.get()
                 .uri("/employees/{id}", id)
-                .headers(h -> h.setBearerAuth(token))
+                .headers(h -> h.setBearerAuth(getCurrentToken()))
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
     }
 
-    public String getQualification(
-            Long employeeId, Long qualificationId, String token) {
-
+    public String getQualification(Long employeeId, Long qualificationId) {
         return webClient.get()
-                .uri("/employees/{id}/qualifications/{qid}",
-                        employeeId, qualificationId)
-                .headers(h -> h.setBearerAuth(token))
+                .uri("/employees/{id}/qualifications/{qid}", employeeId, qualificationId)
+                .headers(h -> h.setBearerAuth(getCurrentToken()))
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
     }
-
-
-
 }

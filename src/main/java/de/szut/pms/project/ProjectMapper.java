@@ -8,20 +8,25 @@ import java.util.List;
 @Component
 public class ProjectMapper {
 
-    public ProjectDto toDto(Project project){
+    public ProjectDto toDto(Project project) {
         return new ProjectDto(
                 project.getId(),
                 project.getProjectName(),
                 project.getStartDate(),
                 project.getEndDate(),
+                project.getProjectLeadId(),
                 project.getCustomerId(),
                 project.getDescription(),
-                project.getProjectemployees());
+                project.getProjectemployees()
+                        .stream()
+                        .map(employee -> employee.getEmployeeId())
+                        .toList()
+        );
     }
 
-    public Project toEntity(CreateProjectDto dto, List<ProjectEmployee> projectemployees){
+    public Project toEntity(CreateProjectDto dto) {
         Project project = new Project();
-        project.setProjectemployees(dto.projectEmployees());
+
         project.setProjectName(dto.projectName());
         project.setStartDate(dto.startDate());
         project.setEndDate(dto.endDate());

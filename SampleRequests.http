@@ -1,17 +1,22 @@
 ### Zuerst in GetBearerToken.http einen Token holen und hier eintragen
-@bearer_token=HIER_TOKEN_EINTRAGEN
+@bearer_token=eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk5MTFhZWQ1YTkyZjYyMjU0NjVlOGVlYzYxZjU5YzBlIiwidHlwIjoiSldUIn0.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwMDAvYXBwbGljYXRpb24vby9lbXBsb3llZV9hcGkvIiwic3ViIjoiMzJiZDEyOTgwMjA3MWE2NTViMDdmZjYzMTA1NjFiNTY5MDhhZjM0OGY5Y2RiMWU0MjkxMDZhMTE2MTIzZTUxNyIsImF1ZCI6ImVtcGxveWVlX2FwaV9jbGllbnQiLCJleHAiOjE3OTMxOTE3MTIsImlhdCI6MTc5MzE4ODcxMiwiYXV0aF90aW1lIjoxNzkzMTg4NzEyLCJhY3IiOiJnb2F1dGhlbnRpay5pby9wcm92aWRlcnMvb2F1dGgyL2RlZmF1bHQiLCJhenAiOiJlbXBsb3llZV9hcGlfY2xpZW50IiwidWlkIjoiQm94OGI1UnBLR21WTU9sTEdsdDl4Wkx3Z2UyWktFZzdpWXZVcG5vbCJ9.F6yt3IfIVpLQ7gf1Ll34CgkM8oxPhfFcP25Io-IUioJtAUY-4AApwktjaBZFtOCYu7p4iUOd7knta5GKCzBXZRYLOW1ZI3WJrnL2rVMN_SkSLkRD6Tw6dyuf4Uo-fTO6P42RYrBGpL-6w7Xxg3LIoydgFFTNQUjPQoRUpVzpt5lq4z1WjtqqfphJfRSGkNMtapXOhzy5c4O_clQ4y-vt2s47lRvX9AhUwlLDfn00ePm_Gm88xZ6xcFV_c6Y6Krr6ZTaBLLtQL4E9_G_x3S1voXh7X-4g96vSVyIeT8IkUGgfgYuAajqSsRdprsqn33EtD818kg87r4-C20D0TZxjbNUxh_-OZMnn6VnEWhli53zfM86RS-CcVxwWBg5D_hvkz0mavi6lD5ORH6xj02nzSc-t7f9FDEluyXtJKYjsEOBsslCjm4Ta0hl3wfPvJkCibPteUzFwSUTDnUeYz8lUrzg1qVDjTPZASnCrgnsk-jIYbEbwqd_5pvCznzqvQP3OkvdQCe9DNKG6k8BgOoeBuHQMY_CDekzTER1CinQKsbIm3hN-YnlyP-TGy1JnR4eTFQRnYnNtschDgLnmAIVc3XFYZMd4Rh7b8qAFjWZk5zPG5S_JjuUS99AiggwyLkGdQXwSRJa-awStBq3XalkWSihk-qSTxQ-8YLqYqz5VHhA
 
 ### Alle Einträge abrufen
 GET http://localhost:8080/hello
 Authorization: Bearer {{bearer_token}}
 
 ### Einen Eintrag anlegen
-POST http://localhost:8080/hello
+POST http://localhost:8080/projects
 Content-Type: application/json
 Authorization: Bearer {{bearer_token}}
 
 {
-  "message": "Hallo Welt!"
+  "projectName": "string",
+  "startDate": "2026-10-28T10:34:42.573Z",
+  "endDate": "2026-10-28T10:34:42.573Z",
+  "projectLeadId": 1,
+  "customerId": 1,
+  "description": "string"
 }
 
 ### Nach Nachricht suchen
@@ -21,3 +26,4 @@ Authorization: Bearer {{bearer_token}}
 ### Einen Eintrag löschen
 DELETE http://localhost:8080/hello/1
 Authorization: Bearer {{bearer_token}}
+

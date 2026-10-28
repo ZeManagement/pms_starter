@@ -10,7 +10,9 @@ public record ProjectDto(
         String projectName,
         LocalDateTime startDate,
         LocalDateTime endDate,
+        Long projectLead,
         Long customerId,
         String description,
-        List<ProjectEmployee> projectEmployees) {
+        List<Long> employeeIds
+) {
 }

@@ -21,8 +21,8 @@ public class Project {
     private Long id;
 
     @Column(name = "lead", nullable = false)
-    private Long projectLead;
-    
+    private Long projectLeadId;
+
     @OneToMany(mappedBy="project",fetch=FetchType.LAZY)
     private List<ProjectEmployee> projectemployees = new ArrayList<>();
 

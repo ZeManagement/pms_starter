@@ -20,6 +20,7 @@ public class ProjectEmployee {
     @JoinColumn(name="project_id", nullable = false)
     private Project project;
 
-    private Long employeeID;
+    private Long employeeId;
+
     private Long qualificationID;
 }

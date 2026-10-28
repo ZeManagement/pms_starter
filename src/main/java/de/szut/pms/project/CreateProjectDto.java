@@ -2,6 +2,7 @@ package de.szut.pms.project;
 
 
 import de.szut.pms.projectemployee.ProjectEmployee;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
@@ -17,12 +18,15 @@ public record CreateProjectDto(
         @NotBlank(message = "Es muss ein Enddatum geben.")
         LocalDateTime endDate,
 
+        @NotBlank(message = "Es muss eine Projektleitung geben.")
+        Long projectLeadId,
+
         @NotBlank(message = "Es muss eine Kunden ID angegeben werden.")
         Long customerId,
 
         String description,
 
-        List<ProjectEmployee> projectEmployees
+        List<Long> employeeIds
 
 ) {
 }
