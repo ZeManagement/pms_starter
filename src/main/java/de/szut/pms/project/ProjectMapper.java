@@ -30,6 +30,7 @@ public class ProjectMapper {
         project.setProjectName(dto.projectName());
         project.setStartDate(dto.startDate());
         project.setEndDate(dto.endDate());
+        project.setProjectLeadId(dto.projectLeadId());
         project.setCustomerId(dto.customerId());
         project.setDescription(dto.description());
         return project;

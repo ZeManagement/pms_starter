@@ -4,6 +4,7 @@ package de.szut.pms.project;
 import de.szut.pms.projectemployee.ProjectEmployee;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,16 +13,16 @@ public record CreateProjectDto(
         @NotBlank(message = "Der Projektname darf nicht leer sein!")
         String projectName,
 
-        @NotBlank(message = "Es muss ein Startdatum geben.")
+        @NotNull(message = "Es muss ein Startdatum geben.")
         LocalDateTime startDate,
 
-        @NotBlank(message = "Es muss ein Enddatum geben.")
+        @NotNull(message = "Es muss ein Enddatum geben.")
         LocalDateTime endDate,
 
-        @NotBlank(message = "Es muss eine Projektleitung geben.")
+        @NotNull(message = "Es muss eine Projektleitung geben.")
         Long projectLeadId,
 
-        @NotBlank(message = "Es muss eine Kunden ID angegeben werden.")
+        @NotNull(message = "Es muss eine Kunden ID angegeben werden.")
         Long customerId,
 
         String description,
