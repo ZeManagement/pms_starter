@@ -1,6 +1,6 @@
 package de.szut.pms.project;
 
-import de.szut.pms.projectemployee.ProjectEmployee;
+import de.szut.pms.common.client.EmployeeDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,7 +13,7 @@ public record ProjectDto(
         Long projectLead,
         Long customerId,
         String description,
-        List<Long> employeeIds
+        List<EmployeeDto> employees
 
 ) {
 }

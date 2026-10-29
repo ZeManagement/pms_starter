@@ -1,5 +1,6 @@
 package de.szut.pms.client;
 
+import de.szut.pms.common.client.EmployeeDto;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Component;
@@ -24,21 +25,21 @@ public class ExternalApiClient {
         return authentication.getToken().getTokenValue();
     }
 
-    public String getEmployees() {
+    /*public String getEmployees() {
         return webClient.get()
                 .uri("/employees")
                 .headers(h -> h.setBearerAuth(getCurrentToken()))
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
-    }
+    }*/
 
-    public String getEmployeeById(Long id) {
+    public EmployeeDto getEmployeeById(Long id) {
         return webClient.get()
                 .uri("/employees/{id}", id)
                 .headers(h -> h.setBearerAuth(getCurrentToken()))
                 .retrieve()
-                .bodyToMono(String.class)
+                .bodyToMono(EmployeeDto.class)
                 .block();
     }
 

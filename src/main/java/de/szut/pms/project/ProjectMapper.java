@@ -1,12 +1,20 @@
 package de.szut.pms.project;
 
+import de.szut.pms.common.client.EmployeeDto;
 import de.szut.pms.projectemployee.ProjectEmployee;
+import de.szut.pms.projectemployee.ProjectEmployeeDto;
+import de.szut.pms.projectemployee.ProjectEmployeeMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 public class ProjectMapper {
+    private final ProjectEmployeeMapper projectEmployeeMapper;
+
+    public ProjectMapper(ProjectEmployeeMapper projectEmployeeMapper) {
+        this.projectEmployeeMapper = projectEmployeeMapper;
+    }
 
     public ProjectDto toDto(Project project) {
         return new ProjectDto(
@@ -17,10 +25,23 @@ public class ProjectMapper {
                 project.getProjectLeadId(),
                 project.getCustomerId(),
                 project.getDescription(),
-                project.getProjectemployees()
-                        .stream()
-                        .map(employee -> employee.getEmployeeId())
-                        .toList()
+                List.of()
+        );
+    }
+
+    public ProjectDto toDto(
+            Project project,
+            List<EmployeeDto> employees) {
+
+        return new ProjectDto(
+                project.getId(),
+                project.getProjectName(),
+                project.getStartDate(),
+                project.getEndDate(),
+                project.getProjectLeadId(),
+                project.getCustomerId(),
+                project.getDescription(),
+                employees
         );
     }
 

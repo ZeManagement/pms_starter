@@ -1,6 +1,7 @@
 package de.szut.pms.project;
 
 import de.szut.pms.client.ExternalApiClient;
+import de.szut.pms.common.client.EmployeeDto;
 import de.szut.pms.common.exceptions.ProjectNotFoundException;
 import de.szut.pms.projectemployee.*;
 import org.springframework.stereotype.Service;
@@ -88,13 +89,16 @@ public class ProjectService {
 
     public ProjectDto findById(Long id) {
         Project project = projectRepository.findById(id)
-                .orElseThrow(()->new ProjectNotFoundException(id));
+                .orElseThrow(() -> new ProjectNotFoundException(id));
 
-        List<ProjectEmployeeDto> employees =
-                projectEmployeeRepository.findByProjectId(id)
-                        .stream()
-                        .map(projectEmployee->projectEmployeeMapper.toDto(projectEmployee))
-                        .toList();
+        List<ProjectEmployee> assignments =
+                projectEmployeeRepository.findByProjectId(id);
+
+        List<EmployeeDto> employees = assignments.stream()
+                .map(assignment ->
+                        externalApiClient.getEmployeeById(
+                                assignment.getEmployeeId()))
+                .toList();
 
         return mapper.toDto(project, employees);
     }
