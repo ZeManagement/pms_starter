@@ -1,5 +1,7 @@
 package de.szut.pms.project;
 
+import de.szut.pms.projectemployee.CreateProjectEmployeeDto;
+import de.szut.pms.projectemployee.ProjectEmployeeDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
@@ -13,9 +15,11 @@ import java.util.List;
 @RequestMapping("/projects")
 public class ProjectController {
     private final ProjectService service;
+    private final ProjectRepository projectRepository;
 
-    public ProjectController(ProjectService service){
+    public ProjectController(ProjectService service, ProjectRepository projectRepository){
         this.service = service;
+        this.projectRepository = projectRepository;
     }
 
     @PostMapping
@@ -30,8 +34,32 @@ public class ProjectController {
         return ResponseEntity.created(location).body(created);
     }
 
+    @PostMapping("/{projectId}/employees")
+    public ResponseEntity<ProjectEmployeeDto> addEmployeeToProject(
+            @PathVariable Long projectId,
+            @Valid @RequestBody CreateProjectEmployeeDto dto) {
+
+        ProjectEmployeeDto created =
+                service.addEmployeeToProject(projectId, dto);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(created.id())
+                .toUri();
+
+        return ResponseEntity.created(location).body(created);
+    }
+
     @GetMapping
-    public ResponseEntity<List<ProjectDto>> getAll(){
+    public ResponseEntity<List<ProjectDto>> getAll() {
         return ResponseEntity.ok(service.findAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProjectDto> getById(
+            @PathVariable Long id) {
+
+        return ResponseEntity.ok(service.findById(id));
     }
 }

@@ -1,11 +1,10 @@
 package de.szut.pms.projectemployee;
 
+import jakarta.validation.constraints.NotNull;
+
 public record CreateProjectEmployeeDto(
 
-        Long projectId,
-
-        Long employeeId,
-
-        Long qualificationId
+        @NotNull Long employeeId,
+        @NotNull Long qualificationId
 ) {
 }

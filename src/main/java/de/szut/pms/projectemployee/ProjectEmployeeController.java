@@ -1,12 +1,9 @@
-package de.szut.pms.projectemployee;
+/*package de.szut.pms.projectemployee;
 
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -15,7 +12,7 @@ import java.net.URI;
 @RequestMapping("/projectEmployees")
 public class ProjectEmployeeController {
     private final ProjectEmployeeService service;
-    
+
     public ProjectEmployeeController(ProjectEmployeeService service) { this.service = service; }
 
     @PostMapping
@@ -29,4 +26,9 @@ public class ProjectEmployeeController {
 
         return ResponseEntity.created(location).body(created);
     }
-}
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProjectEmployeeDto> findProjectEmployeeById(@PathVariable Long id){
+        return ResponseEntity.ok(service.findById(id));
+    }
+}*/

@@ -1,6 +1,7 @@
 package de.szut.pms.project;
 
 
+import de.szut.pms.projectemployee.CreateProjectEmployeeDto;
 import de.szut.pms.projectemployee.ProjectEmployee;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
@@ -27,7 +28,7 @@ public record CreateProjectDto(
 
         String description,
 
-        List<Long> employeeIds
+        List<CreateProjectEmployeeDto> employees
 
 ) {
 }

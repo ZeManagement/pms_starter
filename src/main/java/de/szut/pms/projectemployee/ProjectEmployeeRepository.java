@@ -10,6 +10,8 @@ public interface ProjectEmployeeRepository extends JpaRepository<ProjectEmployee
     // alle Projekte eines Mitarbeiters abrufen
     List<Project> findAllByProjectIdOrderByIdDesc(Long employeeId);
 
+    List<ProjectEmployee> findByProjectId(Long projectId);
+
     long countByProjectId(Long projectId);
 }
 
