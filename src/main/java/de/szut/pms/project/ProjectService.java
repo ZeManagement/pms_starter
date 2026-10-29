@@ -1,7 +1,7 @@
 package de.szut.pms.project;
 
 import de.szut.pms.client.ExternalApiClient;
-import de.szut.pms.common.client.EmployeeDto;
+import de.szut.pms.client.EmployeeDto;
 import de.szut.pms.common.exceptions.ProjectNotFoundException;
 import de.szut.pms.projectemployee.*;
 import org.springframework.stereotype.Service;

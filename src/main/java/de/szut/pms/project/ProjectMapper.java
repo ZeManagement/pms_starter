@@ -1,8 +1,6 @@
 package de.szut.pms.project;
 
-import de.szut.pms.common.client.EmployeeDto;
-import de.szut.pms.projectemployee.ProjectEmployee;
-import de.szut.pms.projectemployee.ProjectEmployeeDto;
+import de.szut.pms.client.EmployeeDto;
 import de.szut.pms.projectemployee.ProjectEmployeeMapper;
 import org.springframework.stereotype.Component;
 

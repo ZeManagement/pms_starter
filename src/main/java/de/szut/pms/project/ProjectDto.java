@@ -1,6 +1,6 @@
 package de.szut.pms.project;
 
-import de.szut.pms.common.client.EmployeeDto;
+import de.szut.pms.client.EmployeeDto;
 
 import java.time.LocalDateTime;
 import java.util.List;

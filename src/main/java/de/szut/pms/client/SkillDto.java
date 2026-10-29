@@ -1,4 +1,4 @@
-package de.szut.pms.common.client;
+package de.szut.pms.client;
 
 public record SkillDto(
         String skill,

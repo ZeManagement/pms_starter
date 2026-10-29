@@ -1,4 +1,4 @@
-package de.szut.pms.common.client;
+package de.szut.pms.client;
 
 import java.util.List;
 
