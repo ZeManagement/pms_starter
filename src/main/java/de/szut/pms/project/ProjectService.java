@@ -2,6 +2,7 @@ package de.szut.pms.project;
 
 import de.szut.pms.client.ExternalApiClient;
 import de.szut.pms.client.EmployeeDto;
+import de.szut.pms.common.exceptions.ProjectAlreadyExistsException;
 import de.szut.pms.common.exceptions.ProjectNotFoundException;
 import de.szut.pms.projectemployee.*;
 import org.springframework.stereotype.Service;
@@ -27,9 +28,14 @@ public class ProjectService {
     }
 
     @Transactional
-    public ProjectDto create(CreateProjectDto dto){
+    public ProjectDto create(CreateProjectDto dto) {
 
-        // prüft ob ID existiert
+        // prüfen ob Projekt schon existiert und wenn ja, Exception werfen
+        if (projectRepository.existsByProjectNameAndCustomerId(dto.projectName(), dto.customerId())) {
+            throw new ProjectAlreadyExistsException(dto.projectName(), dto.customerId());
+        }
+
+        // prüft ob Lead ID existiert
         externalApiClient.getEmployeeById(dto.projectLeadId());
 
         // prüft ob IDs (falls angegeben) gültig sind
@@ -45,8 +51,8 @@ public class ProjectService {
         );
 
         // baut projectEmployee Objekt
-        if(dto.employees() != null){
-            for(CreateProjectEmployeeDto projectEmployeeDto : dto.employees()) {
+        if (dto.employees() != null) {
+            for (CreateProjectEmployeeDto projectEmployeeDto : dto.employees()) {
                 ProjectEmployee p = new ProjectEmployee();
                 p.setEmployeeId(projectEmployeeDto.employeeId());
                 p.setProject(saved);
@@ -59,12 +65,12 @@ public class ProjectService {
     }
 
     @Transactional(readOnly = true)
-    public List<ProjectDto> findAll(){
+    public List<ProjectDto> findAll() {
         return projectRepository.findAll().stream()
                 .map(project -> mapper.toDto(
                         project
-                        ))
-                        //projectemployeerepository.countByProjectId(project.getId())))
+                ))
+                //projectemployeerepository.countByProjectId(project.getId())))
                 .toList();
     }
 
@@ -73,7 +79,7 @@ public class ProjectService {
             CreateProjectEmployeeDto dto) {
 
         Project project = projectRepository.findById(projectId)
-                .orElseThrow(()->new ProjectNotFoundException(projectId));
+                .orElseThrow(() -> new ProjectNotFoundException(projectId));
 
         ProjectEmployee assignment = new ProjectEmployee();
 
