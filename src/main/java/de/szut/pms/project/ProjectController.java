@@ -130,4 +130,13 @@ public class ProjectController {
         service.removeEmployeeFromProject(projectId, employeeId);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProjectDto> updateProject(
+            @PathVariable Long id,
+            @Valid @RequestBody ProjectDto dto){
+        ProjectDto updated = service.update(id, dto);
+        return ResponseEntity.ok(updated);
+    }
+
 }

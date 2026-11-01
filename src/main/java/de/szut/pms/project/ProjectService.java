@@ -229,6 +229,24 @@ public class ProjectService {
         return mapper.toDto(project, employees);
     }
 
+    public ProjectDto update(Long id, ProjectDto dto) {
+        Project project = projectRepository.findById(id)
+                .orElseThrow(() -> new ProjectNotFoundException(id));
+
+        project.setProjectLeadId(dto.projectLead());
+        //Projectemployees ebenfalls setten?
+        //project.setProjectemployees(null);
+        project.setProjectName(dto.projectName());
+        project.setStartDate(dto.startDate());
+        project.setEndDate(dto.endDate());
+        project.setCustomerId(dto.customerId());
+        project.setDescription(dto.description());
+
+        Project updated = projectRepository.save(project);
+
+        return mapper.toDto(updated);
+    }
+
     public EmployeeProjectsDto getProjectsByEmployeeId(Long employeeId) {
         List<ProjectEmployee> assignments = projectEmployeeRepository.findByEmployeeId(employeeId);
         List<SkillDto> allQualifications = externalApiClient.getAllQualifications();
