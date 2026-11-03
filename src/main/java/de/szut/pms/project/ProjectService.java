@@ -230,6 +230,13 @@ public class ProjectService {
     }
 
     public EmployeeProjectsDto getProjectsByEmployeeId(Long employeeId) {
+        // Prüfen, ob Mitarbeiter-ID existiert
+        try {
+            externalApiClient.getEmployeeById(employeeId);
+        } catch (Exception e) {
+            throw new EmployeeNotFoundException(employeeId);
+        }
+
         List<ProjectEmployee> assignments = projectEmployeeRepository.findByEmployeeId(employeeId);
         List<QualificationDto> allQualifications = externalApiClient.getAllQualifications();
         List<EmployeeProjectsDetailsDto> projectDetailsList = new ArrayList<>();
