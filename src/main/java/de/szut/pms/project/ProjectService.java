@@ -439,11 +439,17 @@ public class ProjectService {
                             qualification.skill(),
                             qualification.id()
                     );
-
                     return new EmployeeWithQualificationDto(employee, skill);
                 })
                 .toList();
 
         return new EmployeesByProjectDto(projectDto, employees);
+    }
+
+    public void deleteProject(Long id) {
+        Project project = projectRepository.findById(id)
+                .orElseThrow(() -> new ProjectNotFoundException(id));
+
+        projectRepository.delete(project);
     }
 }

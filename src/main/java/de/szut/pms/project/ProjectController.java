@@ -209,4 +209,9 @@ public class ProjectController {
                 service.findEmployeesByProjectId(id)
         );
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProject(@PathVariable Long id) {
+        service.deleteProject(id);
+        return ResponseEntity.noContent().build();
+    }
 }
