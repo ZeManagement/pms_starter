@@ -140,4 +140,13 @@ public class ProjectController {
                 service.findEmployeesByProjectId(id)
         );
     }
+
+    @GetMapping("/{id}/employees")
+    public ResponseEntity<List<EmployeeDto>> getProjectEmployees(
+            @PathVariable Long id) {
+
+        return ResponseEntity.ok(
+                service.findEmployeesByProjectId(id)
+        );
+    }
 }

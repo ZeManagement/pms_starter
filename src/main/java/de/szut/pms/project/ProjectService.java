@@ -287,4 +287,9 @@ public class ProjectService {
     public List<EmployeeDto> findEmployeesByProjectId(Long id) {
         return findById(id).employees();
     }
+
+    @Transactional(readOnly = true)
+    public List<EmployeeDto> findEmployeesByProjectId(Long id) {
+        return findById(id).employees();
+    }
 }
