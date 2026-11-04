@@ -1,8 +1,15 @@
 package de.szut.pms.project;
 
 import de.szut.pms.client.EmployeeProjectsDto;
+import de.szut.pms.client.EmployeeDto;
+import de.szut.pms.project.dto.EmployeesByProjectDto;
 import de.szut.pms.projectemployee.CreateProjectEmployeeDto;
 import de.szut.pms.projectemployee.ProjectEmployeeDto;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -37,8 +44,13 @@ public class ProjectController {
 
     // Creates a new project.
     @PostMapping
-    @Operation(summary = "Creates a new project", description = "Creates a new project with lead, customer and optional employees.") // NEU
-    @ApiResponse(responseCode = "201", description = "Project successfully created")
+    @Operation(summary = "Creates a new project", description = "Creates a new project with lead, customer and optional employees.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Project successfully created"),
+            @ApiResponse(responseCode = "400", description = "Bad Request - Request body validation failed"),
+            @ApiResponse(responseCode = "404", description = "Not Found - Customer, Lead-ID, Employee-ID, or Qualification-ID does not exist"),
+            @ApiResponse(responseCode = "409", description = "Conflict - Project already exists OR an assigned employee has a timeline overlap with another project")
+    })
        public ResponseEntity<ProjectDto> createProject(@Valid @RequestBody CreateProjectDto dto){
         ProjectDto created = service.create(dto);
 
@@ -52,8 +64,13 @@ public class ProjectController {
 
     // Adds an employee to an existing project.
     @PostMapping("/{projectId}/employees")
-    @Operation(summary = "Adds an employee to an existing project", description = "Assigns an employee to a project including their qualification.") // NEU
-    @ApiResponse(responseCode = "201", description = "Employee successfully added to project")
+    @Operation(summary = "Adds an employee to an existing project", description = "Assigns an employee to a project including their qualification.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Employee successfully added to project"),
+            @ApiResponse(responseCode = "400", description = "Bad Request - Invalid input data (validation failed)"),
+            @ApiResponse(responseCode = "404", description = "Not Found - The project ID, employee ID, or qualification ID does not exist"),
+            @ApiResponse(responseCode = "409", description = "Conflict - Employee is already assigned to this project OR has a schedule conflict (overlapping project periods)")
+    })
     public ResponseEntity<ProjectEmployeeDto> addEmployeeToProject(
             @PathVariable Long projectId,
             @Valid @RequestBody CreateProjectEmployeeDto dto) {
@@ -72,7 +89,7 @@ public class ProjectController {
 
     // Retrieves all projects.
     @GetMapping
-    @Operation(summary = "Retrieves all projects", description = "Returns a list of all available projects.") // NEU
+    @Operation(summary = "Retrieves all projects", description = "Returns a list of all available projects.")
     @ApiResponse(responseCode = "200", description = "Successfully retrieved list of projects")
     public ResponseEntity<List<ProjectDto>> getAll() {
         return ResponseEntity.ok(service.findAll());
@@ -80,8 +97,11 @@ public class ProjectController {
 
     // Retrieves a project by its ID
     @GetMapping("/{id}")
-    @Operation(summary = "Retrieves a project by its ID", description = "Returns the requested project based on the unique identifier.") // NEU
-    @ApiResponse(responseCode = "200", description = "Successfully retrieved the project")
+    @Operation(summary = "Retrieves a project by its ID", description = "Returns the requested project based on the unique identifier.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved the project"),
+            @ApiResponse(responseCode = "404", description = "Not Found - No project found with the given identifier")
+    })
     public ResponseEntity<ProjectDto> getById(
             @PathVariable Long id) {
 
@@ -90,8 +110,11 @@ public class ProjectController {
 
     // Retrieves all projects an employee has participated in
     @GetMapping("/employees/{employeeId}")
-    @Operation(summary = "Retrieves all projects an employee has participated in", description = "Returns a list of projects associated with the employee, including their qualifications.") // NEU
-    @ApiResponse(responseCode = "200", description = "Successfully retrieved employee projects")
+    @Operation(summary = "Retrieves all projects an employee has participated in", description = "Returns a list of projects associated with the employee, including their qualifications.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved employee projects"),
+            @ApiResponse(responseCode = "404", description = "Not Found - No employee found with the given identifier")
+    })
     public ResponseEntity<EmployeeProjectsDto> getProjectsByEmployeeId(
             @PathVariable Long employeeId) {
 
@@ -126,6 +149,8 @@ public class ProjectController {
                     )
             )
     })
+
+
     public ResponseEntity<Void> removeEmployeeFromProject(@PathVariable Long projectId, @PathVariable Long employeeId){
         service.removeEmployeeFromProject(projectId, employeeId);
         return ResponseEntity.noContent().build();
@@ -157,4 +182,31 @@ public class ProjectController {
         return ResponseEntity.ok(updated);
     }
 
+    @GetMapping("/{id}/employees")
+    @Operation(
+            summary = "Get all employees of a project",
+            description = "Retrieves all employees assigned to a specific project, including their names and the qualification they contribute to that project."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successfully retrieved all employees assigned to the project",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = EmployeesByProjectDto.class)
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Project not found",
+                    content = @Content
+            )
+    })
+    public ResponseEntity<EmployeesByProjectDto> getProjectEmployees(
+            @PathVariable Long id) {
+
+        return ResponseEntity.ok(
+                service.findEmployeesByProjectId(id)
+        );
+    }
 }

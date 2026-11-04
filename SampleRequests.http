@@ -1,5 +1,5 @@
 ### Zuerst in GetBearerToken.http einen Token holen und hier eintragen
-@bearer_token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjhkY2YzODZmM2IwMDI5OGI1Yjk3YzVlZTU3ZWRiYjg2IiwidHlwIjoiSldUIn0.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwMDAvYXBwbGljYXRpb24vby9lbXBsb3llZV9hcGkvIiwic3ViIjoiY2Q3YWQ5NGYyMzRmMzg1YTA1MTI0NjE2MzVhNThkMjlhMmU3YjZhYWYyODg4OTE0MWNiMTk2MDA4NTBmYjcwNiIsImF1ZCI6ImVtcGxveWVlX2FwaV9jbGllbnQiLCJleHAiOjE3OTM3OTgwMTMsImlhdCI6MTc5Mzc5NTAxMywiYXV0aF90aW1lIjoxNzkzNzk1MDEzLCJhY3IiOiJnb2F1dGhlbnRpay5pby9wcm92aWRlcnMvb2F1dGgyL2RlZmF1bHQiLCJhenAiOiJlbXBsb3llZV9hcGlfY2xpZW50IiwidWlkIjoiUVd0c21lbEFnRWNnTkhXZTVhM09Eclk0dnlqNnFDT0VkYTNjVzhERCJ9.YGDo82AFnH5laYr-5S7i3VRjRWz5g8AKOIkj6B8GWY2fSG1BhR2uXdqysQcJ5ray8O5JcbjpYahxBtE7-GPFqpMv0oxD-Ekk9eM2d7PoXwvUjWkBXrExRfvMkqswnHOt_7pAWOcxMMXHtnQfVx7mszlud5xYXfrtcqW1GE1N4M2m0HFaY2kUm1INUpt42PUqiTVyA46TB-8vlDme2F-9aFreQnPVEG1H67LEutLVyowEgGo1ieyMBwiuBHT5-M7fGUVGrhIYO682Z_NnyxWSSaE-zdJHbU6jTukWhAYMcfSaehJjn27bF8IIAp5LD0ezBOn1ujzoIkAIXbttCv4JCIITqWpIakY_zsvOoNQcvOV1EY-dPcGKhQt72It9ikXpC-KyGuhCOmthZ2PaiOWgBUEjsYE0ccHHVFHKCjq3IBW0uc5nG-6gJxUSU8xTsiLK7BnhQVS6pg6V8limmCijkEGV_qWT3oDm_FUWBfjAefG8wT7I9N2RWCLUnjQ6GYj9gApA_9pqMPjsqD4eSwWC-tOtSFqBxIXVczecXz7MSNsGL9Lf_zPIvVGQQ2rcGekD45FcJoMCOuO1PDT_Ve_pgjv-xluYn5hjvVsw5jRBw6PTdmXyT4t_pt4tB2P93QUH1HZEBtlXyXMfbQi_Z08XxI5z4wuedcbbqMh-72HNpxY
+@bearer_token=eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk5MTFhZWQ1YTkyZjYyMjU0NjVlOGVlYzYxZjU5YzBlIiwidHlwIjoiSldUIn0.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwMDAvYXBwbGljYXRpb24vby9lbXBsb3llZV9hcGkvIiwic3ViIjoiMzJiZDEyOTgwMjA3MWE2NTViMDdmZjYzMTA1NjFiNTY5MDhhZjM0OGY5Y2RiMWU0MjkxMDZhMTE2MTIzZTUxNyIsImF1ZCI6ImVtcGxveWVlX2FwaV9jbGllbnQiLCJleHAiOjE3OTM4MDA1MDksImlhdCI6MTc5Mzc5NzUwOSwiYXV0aF90aW1lIjoxNzkzNzk3NTA5LCJhY3IiOiJnb2F1dGhlbnRpay5pby9wcm92aWRlcnMvb2F1dGgyL2RlZmF1bHQiLCJhenAiOiJlbXBsb3llZV9hcGlfY2xpZW50IiwidWlkIjoiVFl6bWZESDYyTnV1dHpQTThoV3lZNWZTWXgyV3V1Z2o3azhEd2x1UCJ9.udlO0AvWf30PbJwjonFbjOnaTRSym8XPCzwb-jvUYS3kS8iHar3D7o-aq04Yrzfe4oBmeX9Xc5EJFcE40yvUbJR5zUYGX7SJBMbIbTUQ_RvVHC2yVAf2wFcwcOO2yN3HzjtElFYdecAKFyVCcBMb7x7Lv1J25p0RL4RAVb9m9dQ9kOLjeMzCp_TsOqiZHyKoFEPILHZge6XBIWh0Ckg_HtybKl3UZZo0pYbbFhwob8vZYkTAZNJzf_jL56HhkEhSfAxPoMLG-HXLRE_c9eE6YsC6LMqZ-5oXTgqPZc0Z9pxjJtKXgHFPUhtZVbHtmUUnn8FTMEwfVgV4jqIL8nAcbmMBD_0A7I-L5m2TUi7RWLj89NuCYUJeV7WIGmodqbdK_9IGxHvYeoOyJ70rUJZ9-ZhMlqQDTpRCiu6fVl30p9wxCgz4YHgzCkinQaDsTR6tuVw6Y7vkYFZi9CyU0IpXH0jO3YF8fGwSR18U5Es60DuIRQ-SAw_Q-e1TJ4A_Y13FTeLEoVmys-YAdxpraBr1hnUf3z8y5J3yBsISpdw5EsIhYHY1kBCIfn3P-EjaPPw5bbHAX0yQTRF7OwqMiCn3Ifp2irzSzWWDyoJ2pB14XXA06yx-n3x8NMKJ1yXAs9qGAtvFE0ngwOwlus6eJIDmve0-kEC730NQ5xWUUguspTM
 
 
 ### Einen Eintrag anlegen
@@ -16,7 +16,7 @@ Authorization: Bearer {{bearer_token}}
   "description": "Ein weiteres Projekt zum testen",
   "employees": [
     {
-      "employeeId": 2,
+      "employeeId": 1,
       "qualificationId": 2
     }
   ]
@@ -29,7 +29,7 @@ Authorization: Bearer {{bearer_token}}
 
 {
   "employeeId": 2,
-  "qualificationId": 99
+  "qualificationId": 2
 }
 
 ### Alle Projekte abrufen
@@ -37,11 +37,16 @@ GET http://localhost:8080/projects
 Authorization: Bearer {{bearer_token}}
 Accept: application/json
 
+### Projekt per ID abrufen (inkl. aller zugeordneten Employees)
+GET http://localhost:8080/projects/1
+Authorization: Bearer {{bearer_token}}
+Accept: application/json
+
+
 ### Alle Projekte eines Mitarbeiters abrufen (inkl. Qualifikationen)
 GET http://localhost:8080/projects/employees/1
 Authorization: Bearer {{bearer_token}}
 Accept: application/json
-
 
 ### Projekt mit allen zugeordneten Employees abrufen
 GET http://localhost:8080/projects/1
@@ -50,6 +55,8 @@ Accept: application/json
 
 ### Einen Mitarbeiter aus einem Projekt entfernen
 DELETE http://localhost:8080/projects/1/employees/1
+
+
 ### Ein Projekt bearbeiten
 PUT http://localhost:8080/projects/2
 Authorization: Bearer {{bearer_token}}
@@ -85,15 +92,7 @@ Content-Type: application/json
   "employees": []
 }
 
-
-### Alle Einträge abrufen
-GET http://localhost:8080/hello
+### Alle Mitarbeiter eines Projektes abrufen
+GET http://localhost:8080/projects/1/employees
 Authorization: Bearer {{bearer_token}}
-
-### Nach Nachricht suchen
-GET http://localhost:8080/hello/findByMessage?message=Hallo Welt!
-Authorization: Bearer {{bearer_token}}
-
-### Einen Eintrag löschen
-DELETE http://localhost:8080/hello/1
-Authorization: Bearer {{bearer_token}}
+Accept: application/json
