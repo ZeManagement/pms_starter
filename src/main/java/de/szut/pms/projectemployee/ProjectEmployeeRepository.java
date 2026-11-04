@@ -1,6 +1,7 @@
 package de.szut.pms.projectemployee;
 
 import de.szut.pms.project.Project;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -21,6 +22,8 @@ public interface ProjectEmployeeRepository extends JpaRepository<ProjectEmployee
     boolean existsByProjectIdAndEmployeeId(Long projectId, Long employeeId);
 
     List<ProjectEmployee> findByEmployeeId(Long employeeId);
+
+    Optional<ProjectEmployee> findByProjectIdAndEmployeeId(Long projectId, Long employeeId);
 }
 
 
