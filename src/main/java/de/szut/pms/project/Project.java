@@ -23,7 +23,7 @@ public class Project {
     @Column(name = "lead", nullable = false)
     private Long projectLeadId;
 
-    @OneToMany(mappedBy="project",fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="project",fetch=FetchType.LAZY, cascade=CascadeType.ALL, orphanRemoval=true)
     private List<ProjectEmployee> projectemployees = new ArrayList<>();
 
     @Column(name="project_name", nullable = false)
