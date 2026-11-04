@@ -1,8 +1,12 @@
 package de.szut.pms.project;
 
 import de.szut.pms.client.*;
+import de.szut.pms.client.dto.EmployeeNameDto;
+import de.szut.pms.client.dto.EmployeeWithQualificationDto;
 import de.szut.pms.common.exceptions.*;
 import de.szut.pms.customer.DummyCustomerClient;
+import de.szut.pms.project.dto.EmployeesByProjectDto;
+import de.szut.pms.project.dto.ProjectNameDto;
 import de.szut.pms.projectemployee.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -284,7 +288,54 @@ public class ProjectService {
     }
 
     @Transactional(readOnly = true)
-    public List<EmployeeDto> findEmployeesByProjectId(Long id) {
-        return findById(id).employees();
+    public EmployeesByProjectDto findEmployeesByProjectId(Long projectId) {
+
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new ProjectNotFoundException(projectId));
+
+        List<ProjectEmployee> assignments =
+                projectEmployeeRepository.findByProjectId(projectId);
+
+        List<SkillDto> qualifications =
+                externalApiClient.getAllQualifications();
+
+        ProjectNameDto projectDto = new ProjectNameDto(
+                project.getId(),
+                project.getProjectName()
+        );
+
+        List<EmployeeWithQualificationDto> employees = assignments.stream()
+                .map(assignment -> {
+
+                    EmployeeDto externalEmployee =
+                            externalApiClient.getEmployeeById(
+                                    assignment.getEmployeeId()
+                            );
+
+                    EmployeeNameDto employee = new EmployeeNameDto(
+                            externalEmployee.id(),
+                            externalEmployee.lastName(),
+                            externalEmployee.firstName()
+                    );
+
+                    Long qualificationId = assignment.getQualificationID();
+
+                    SkillDto qualification = qualifications.stream()
+                            .filter(q -> q.id().equals(qualificationId))
+                            .findFirst()
+                            .orElseThrow(() ->
+                                    new QualificationNotFoundException(qualificationId)
+                            );
+
+                    SkillDto skill = new SkillDto(
+                            qualification.skill(),
+                            qualification.id()
+                    );
+
+                    return new EmployeeWithQualificationDto(employee, skill);
+                })
+                .toList();
+
+        return new EmployeesByProjectDto(projectDto, employees);
     }
 }

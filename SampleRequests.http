@@ -1,5 +1,5 @@
 ### Zuerst in GetBearerToken.http einen Token holen und hier eintragen
-@bearer_token=eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk5MTFhZWQ1YTkyZjYyMjU0NjVlOGVlYzYxZjU5YzBlIiwidHlwIjoiSldUIn0.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwMDAvYXBwbGljYXRpb24vby9lbXBsb3llZV9hcGkvIiwic3ViIjoiMzJiZDEyOTgwMjA3MWE2NTViMDdmZjYzMTA1NjFiNTY5MDhhZjM0OGY5Y2RiMWU0MjkxMDZhMTE2MTIzZTUxNyIsImF1ZCI6ImVtcGxveWVlX2FwaV9jbGllbnQiLCJleHAiOjE3OTM3OTk0OTcsImlhdCI6MTc5Mzc5NjQ5NywiYXV0aF90aW1lIjoxNzkzNzk2NDk3LCJhY3IiOiJnb2F1dGhlbnRpay5pby9wcm92aWRlcnMvb2F1dGgyL2RlZmF1bHQiLCJhenAiOiJlbXBsb3llZV9hcGlfY2xpZW50IiwidWlkIjoiMkp4ajhuTU8wRm5VbE4ySkRodHBVaUI5b1p0dnk0UFJsT2dXS24ydyJ9.rxfJlcw0gDn7mVyTdUidke04_ZMI2bkXUP9eHVtjW8Q441IUS3WwZiVd0IsS4gmo2WPV_GG9W0XDCZAguP1kPj7cM_gF2N9nZKst6boaRmXBj8o0Df-NqCxRMJJ8tzGQV6TCUwDfHP9EkiEu3-7JRsG7lgy-9lRH6N6EW8fmiQyF63L_L4xPvpQjtAWYGsSsXktOTxSzoVRZxTmtbtxX6O2QOCa50ZspkUstcks79sxggKTbY-ZOOE5zFzN9a7VFLKJupuhxJvO0ImZXl3jeoM7-HZYlJtxLJOAi6UMEyZ7ejTGapeIHKxNR6Hfa23HDlp6UKp3bSVttakDTnyO3K-vR0z4_TQHqoxjdSFiNwAQbBV5I5OqWn5XMmMjwakD8EPUjgaxozQTRajJ-y-y7dGQKNJV4lEo7C-nAowsbYwU9SKznMpdANlB94HoqAJ2NGZwoxbyOtX8VW2Fvf8MsRWER_JfyMIfHt85qrasvPZXE_X6nlZ2nmFEIDf36CdG7eMIV72AcYMxKZOlV95lBk9gii9AKRptqyjmYjcSmF76Q4f7nhPTPlRWIy9QZD9t9tF-PTvVmKFTnoSg8Es5fujsH-mP8kvTQxpIRcOiKWqHe5HHJ4Yi_9TEoZ7_8TsIqazHQSbnaTvYLXmWdtYZPPXeSoxu6Rl8z5fV9ihzQGSk
+@bearer_token=eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk5MTFhZWQ1YTkyZjYyMjU0NjVlOGVlYzYxZjU5YzBlIiwidHlwIjoiSldUIn0.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwMDAvYXBwbGljYXRpb24vby9lbXBsb3llZV9hcGkvIiwic3ViIjoiMzJiZDEyOTgwMjA3MWE2NTViMDdmZjYzMTA1NjFiNTY5MDhhZjM0OGY5Y2RiMWU0MjkxMDZhMTE2MTIzZTUxNyIsImF1ZCI6ImVtcGxveWVlX2FwaV9jbGllbnQiLCJleHAiOjE3OTM4MDA1MDksImlhdCI6MTc5Mzc5NzUwOSwiYXV0aF90aW1lIjoxNzkzNzk3NTA5LCJhY3IiOiJnb2F1dGhlbnRpay5pby9wcm92aWRlcnMvb2F1dGgyL2RlZmF1bHQiLCJhenAiOiJlbXBsb3llZV9hcGlfY2xpZW50IiwidWlkIjoiVFl6bWZESDYyTnV1dHpQTThoV3lZNWZTWXgyV3V1Z2o3azhEd2x1UCJ9.udlO0AvWf30PbJwjonFbjOnaTRSym8XPCzwb-jvUYS3kS8iHar3D7o-aq04Yrzfe4oBmeX9Xc5EJFcE40yvUbJR5zUYGX7SJBMbIbTUQ_RvVHC2yVAf2wFcwcOO2yN3HzjtElFYdecAKFyVCcBMb7x7Lv1J25p0RL4RAVb9m9dQ9kOLjeMzCp_TsOqiZHyKoFEPILHZge6XBIWh0Ckg_HtybKl3UZZo0pYbbFhwob8vZYkTAZNJzf_jL56HhkEhSfAxPoMLG-HXLRE_c9eE6YsC6LMqZ-5oXTgqPZc0Z9pxjJtKXgHFPUhtZVbHtmUUnn8FTMEwfVgV4jqIL8nAcbmMBD_0A7I-L5m2TUi7RWLj89NuCYUJeV7WIGmodqbdK_9IGxHvYeoOyJ70rUJZ9-ZhMlqQDTpRCiu6fVl30p9wxCgz4YHgzCkinQaDsTR6tuVw6Y7vkYFZi9CyU0IpXH0jO3YF8fGwSR18U5Es60DuIRQ-SAw_Q-e1TJ4A_Y13FTeLEoVmys-YAdxpraBr1hnUf3z8y5J3yBsISpdw5EsIhYHY1kBCIfn3P-EjaPPw5bbHAX0yQTRF7OwqMiCn3Ifp2irzSzWWDyoJ2pB14XXA06yx-n3x8NMKJ1yXAs9qGAtvFE0ngwOwlus6eJIDmve0-kEC730NQ5xWUUguspTM
 
 
 ### Einen Eintrag anlegen
@@ -17,7 +17,7 @@ Authorization: Bearer {{bearer_token}}
   "employees": [
     {
       "employeeId": 1,
-      "qualificationId": 1
+      "qualificationId": 2
     }
   ]
 }
@@ -28,8 +28,8 @@ Content-Type: application/json
 Authorization: Bearer {{bearer_token}}
 
 {
-  "employeeId": 1,
-  "qualificationId": 1
+  "employeeId": 2,
+  "qualificationId": 2
 }
 
 ### Alle Projekte abrufen
@@ -41,7 +41,6 @@ Accept: application/json
 GET http://localhost:8080/projects/employees/1
 Authorization: Bearer {{bearer_token}}
 Accept: application/json
-
 
 ### Projekt mit allen zugeordneten Employees abrufen
 GET http://localhost:8080/projects/1
@@ -57,4 +56,5 @@ Accept: application/json
 GET http://localhost:8080/projects/1/employees
 Authorization: Bearer {{bearer_token}}
 Accept: application/json
+
 
