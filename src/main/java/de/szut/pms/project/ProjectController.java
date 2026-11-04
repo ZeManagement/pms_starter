@@ -10,6 +10,11 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
@@ -143,6 +148,25 @@ public class ProjectController {
     }
 
     @GetMapping("/{id}/employees")
+    @Operation(
+            summary = "Get all employees of a project",
+            description = "Retrieves all employees assigned to a specific project, including their names and the qualification they contribute to that project."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successfully retrieved all employees assigned to the project",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = EmployeesByProjectDto.class)
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Project not found",
+                    content = @Content
+            )
+    })
     public ResponseEntity<EmployeesByProjectDto> getProjectEmployees(
             @PathVariable Long id) {
 
