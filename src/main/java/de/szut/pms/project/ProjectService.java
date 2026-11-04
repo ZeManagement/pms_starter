@@ -288,11 +288,6 @@ public class ProjectService {
     }
 
     @Transactional(readOnly = true)
-    public List<EmployeeDto> findEmployeesByProjectId(Long id) {
-        return findById(id).employees();
-    }
-
-    @Transactional(readOnly = true)
     public EmployeesByProjectDto findEmployeesByProjectId(Long projectId) {
 
         Project project = projectRepository.findById(projectId)
@@ -301,7 +296,7 @@ public class ProjectService {
         List<ProjectEmployee> assignments =
                 projectEmployeeRepository.findByProjectId(projectId);
 
-        List<QualificationDto> qualifications =
+        List<SkillDto> qualifications =
                 externalApiClient.getAllQualifications();
 
         ProjectNameDto projectDto = new ProjectNameDto(
@@ -325,7 +320,7 @@ public class ProjectService {
 
                     Long qualificationId = assignment.getQualificationID();
 
-                    QualificationDto qualification = qualifications.stream()
+                    SkillDto qualification = qualifications.stream()
                             .filter(q -> q.id().equals(qualificationId))
                             .findFirst()
                             .orElseThrow(() ->

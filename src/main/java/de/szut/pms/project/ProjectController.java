@@ -139,15 +139,6 @@ public class ProjectController {
     }
 
     @GetMapping("/{id}/employees")
-    public ResponseEntity<List<EmployeeDto>> getProjectEmployees(
-            @PathVariable Long id) {
-
-        return ResponseEntity.ok(
-                service.findEmployeesByProjectId(id)
-        );
-    }
-
-    @GetMapping("/{id}/employees")
     @Operation(
             summary = "Get all employees of a project",
             description = "Retrieves all employees assigned to a specific project, including their names and the qualification they contribute to that project."
