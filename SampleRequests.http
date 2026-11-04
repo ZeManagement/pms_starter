@@ -11,7 +11,7 @@ Authorization: Bearer {{bearer_token}}
   "projectName": "Ein Projekt",
   "startDate": "2026-10-28T10:34:42.573Z",
   "endDate": "2026-10-28T10:34:42.573Z",
-  "projectLeadId": 2,
+  "projectLeadId": 234488,
   "customerId": 1,
   "description": "Ein weiteres Projekt zum testen",
   "employees": [
@@ -55,12 +55,44 @@ Accept: application/json
 
 ### Einen Mitarbeiter aus einem Projekt entfernen
 DELETE http://localhost:8080/projects/1/employees/1
+
+
+### Ein Projekt bearbeiten
+PUT http://localhost:8080/projects/2
 Authorization: Bearer {{bearer_token}}
-Accept: application/json
+Content-Type: application/json
+
+{
+  "projectName": "UpdatedName",
+  "startDate": "2026-12-28T10:34:42.573Z",
+  "endDate": "2027-11-28T10:34:42.573Z",
+  "projectLeadId": 155555,
+  "customerId": 22,
+  "description": "Ein Projekt mit geupdateten Daten",
+  "employees": [
+    {
+      "employeeId": 1,
+      "qualificationId": 1
+    }
+  ]
+}
+
+### Ein Projekt bearbeiten - leere Employeeliste
+PUT http://localhost:8080/projects/1
+Authorization: Bearer {{bearer_token}}
+Content-Type: application/json
+
+{
+  "projectName": "UpdatedName",
+  "startDate": "2026-12-28T10:34:42.573Z",
+  "endDate": "2027-11-28T10:34:42.573Z",
+  "projectLeadId": 1,
+  "customerId": 23,
+  "description": "Ein Projekt mit geupdateten Daten",
+  "employees": []
+}
 
 ### Alle Mitarbeiter eines Projektes abrufen
 GET http://localhost:8080/projects/1/employees
 Authorization: Bearer {{bearer_token}}
 Accept: application/json
-
-

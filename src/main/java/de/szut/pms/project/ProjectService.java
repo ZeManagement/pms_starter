@@ -232,6 +232,108 @@ public class ProjectService {
         return mapper.toDto(project, employees);
     }
 
+    @Transactional
+    public ProjectDto update(Long id, CreateProjectDto dto) {
+
+        // prüft CustomerID
+        if (!dummyCustomerClient.existsById(dto.customerId())) {
+            throw new CustomerNotFoundException(dto.customerId());
+        }
+        // prüft ob Lead ID existiert
+        try {
+            externalApiClient.getEmployeeById(dto.projectLeadId());
+        } catch (Exception e) {
+            throw new EmployeeNotFoundException(dto.projectLeadId());
+        }
+
+        // prüft ob IDs (falls angegeben) gültig sind
+        List<SkillDto> qualifications =
+                externalApiClient.getAllQualifications();
+
+        if (dto.employees() != null) {
+            for (CreateProjectEmployeeDto projectEmployeeDto : dto.employees()) {
+
+                Long employeeId = projectEmployeeDto.employeeId();
+                Long qualificationId = projectEmployeeDto.qualificationId();
+
+                try {
+                    externalApiClient.getEmployeeById(employeeId);
+                } catch (Exception e) {
+                    throw new EmployeeNotFoundException(employeeId);
+                }
+
+                boolean qualificationExists = qualifications.stream()
+                        .anyMatch(q -> q.id().equals(qualificationId));
+
+                if (!qualificationExists) {
+                    throw new QualificationNotFoundException(
+                            qualificationId);
+                }
+
+                // Prüfen ob MA im Zeitraum schon busy ist
+                List<ProjectEmployee> existingAssignments =
+                        projectEmployeeRepository.findByEmployeeId(employeeId);
+
+                for (ProjectEmployee existing : existingAssignments) {
+                    // Da die Zeiträume im Projekt liegen, holen wir das verknüpfte Projekt der alten Zuordnung
+                    Project existingProject = existing.getProject();
+
+                    // Überschneidungs-Logik zwischen dem neuen Projekt (aus dem dto) und dem bestehenden Projekt
+                    // (Start_Neu <= Ende_Alt) UND (Ende_Neu >= Start_Alt)
+                    boolean overlaps = !dto.startDate().isAfter(existingProject.getEndDate()) &&
+                            !dto.endDate().isBefore(existingProject.getStartDate());
+
+                    if (overlaps) {
+                        throw new ProjectPeriodConflictException(
+                                employeeId,
+                                dto.startDate(),
+                                dto.endDate()
+                        );
+                    }
+                }
+
+            }
+        }
+
+        Project project = projectRepository.findById(id)
+                .orElseThrow(() -> new ProjectNotFoundException(id));
+
+        project.setProjectLeadId(dto.projectLeadId());
+        project.setProjectName(dto.projectName());
+        project.setStartDate(dto.startDate());
+        project.setEndDate(dto.endDate());
+        project.setCustomerId(dto.customerId());
+        project.setDescription(dto.description());
+
+        // baut projectEmployee Objekt
+        List<EmployeeDto> employees = new ArrayList<>();
+        if (dto.employees() != null) {
+            for (CreateProjectEmployeeDto dtoEmployee : dto.employees()) {
+
+                EmployeeDto employee = externalApiClient.getEmployeeById(
+                        dtoEmployee.employeeId());
+
+                employees.add(employee);
+
+                //Zuordnung zwischen Mitarbeiter und Projekt suchen, wenn nicht gefunden
+                ProjectEmployee projectEmployee =
+                        projectEmployeeRepository
+                                .findByProjectIdAndEmployeeId(id, dtoEmployee.employeeId())
+                                .orElseGet(() -> new ProjectEmployee());
+
+                projectEmployee.setEmployeeId(dtoEmployee.employeeId());
+                projectEmployee.setProject(project);
+                projectEmployee.setQualificationID(dtoEmployee.qualificationId());
+
+                projectEmployeeRepository.save(projectEmployee);
+            }
+        }
+
+        Project updated = projectRepository.save(project);
+
+        return mapper.toDto(updated, employees);
+    }
+
     public EmployeeProjectsDto getProjectsByEmployeeId(Long employeeId) {
         List<ProjectEmployee> assignments = projectEmployeeRepository.findByEmployeeId(employeeId);
         List<SkillDto> allQualifications = externalApiClient.getAllQualifications();
