@@ -7,6 +7,10 @@ import de.szut.pms.projectemployee.CreateProjectEmployeeDto;
 import de.szut.pms.projectemployee.ProjectEmployeeDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -208,5 +212,25 @@ public class ProjectController {
         return ResponseEntity.ok(
                 service.findEmployeesByProjectId(id)
         );
+    }
+    @DeleteMapping("/{id}")
+    @Operation(
+            summary = "Delete a project",
+            description = "Deletes a project by its ID. The project must exist before it can be deleted."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "204",
+                    description = "Project successfully deleted"
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Project not found",
+                    content = @Content
+            )
+    })
+    public ResponseEntity<Void> deleteProject(@PathVariable Long id) {
+        service.deleteProject(id);
+        return ResponseEntity.noContent().build();
     }
 }
