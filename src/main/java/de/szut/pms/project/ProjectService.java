@@ -52,7 +52,6 @@ public class ProjectService {
             throw new EmployeeNotFoundException(dto.projectLeadId());
         }
 
-
         // prüft ob IDs (falls angegeben) gültig sind
         List<SkillDto> qualifications =
                 externalApiClient.getAllQualifications();
@@ -237,6 +236,13 @@ public class ProjectService {
         List<ProjectEmployee> assignments = projectEmployeeRepository.findByEmployeeId(employeeId);
         List<SkillDto> allQualifications = externalApiClient.getAllQualifications();
         List<EmployeeProjectsDetailsDto> projectDetailsList = new ArrayList<>();
+
+// Prüft ob ID überhaupt existiert
+        try {
+            externalApiClient.getEmployeeById(employeeId);
+        } catch (Exception e) {
+            throw new EmployeeNotFoundException(employeeId);
+        }
 
         for (ProjectEmployee assignment : assignments) {
             Project project = assignment.getProject();

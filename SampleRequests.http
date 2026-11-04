@@ -37,6 +37,12 @@ GET http://localhost:8080/projects
 Authorization: Bearer {{bearer_token}}
 Accept: application/json
 
+### Projekt per ID abrufen (inkl. aller zugeordneten Employees)
+GET http://localhost:8080/projects/1
+Authorization: Bearer {{bearer_token}}
+Accept: application/json
+
+
 ### Alle Projekte eines Mitarbeiters abrufen (inkl. Qualifikationen)
 GET http://localhost:8080/projects/employees/1
 Authorization: Bearer {{bearer_token}}
