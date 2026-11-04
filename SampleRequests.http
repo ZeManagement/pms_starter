@@ -73,7 +73,7 @@ Content-Type: application/json
   "projectName": "UpdatedName",
   "startDate": "2026-12-28T10:34:42.573Z",
   "endDate": "2027-11-28T10:34:42.573Z",
-  "projectLeadId": 155555,
+  "projectLeadId": 1,
   "customerId": 22,
   "description": "Ein Projekt mit geupdateten Daten",
   "employees": [
