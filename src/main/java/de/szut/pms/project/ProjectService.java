@@ -282,4 +282,9 @@ public class ProjectService {
         // Delete assignment
         projectEmployeeRepository.delete(assignment);
     }
+
+    @Transactional(readOnly = true)
+    public List<EmployeeDto> findEmployeesByProjectId(Long id) {
+        return findById(id).employees();
+    }
 }

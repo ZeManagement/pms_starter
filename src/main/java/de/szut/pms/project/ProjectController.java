@@ -1,6 +1,7 @@
 package de.szut.pms.project;
 
 import de.szut.pms.client.EmployeeProjectsDto;
+import de.szut.pms.client.EmployeeDto;
 import de.szut.pms.projectemployee.CreateProjectEmployeeDto;
 import de.szut.pms.projectemployee.ProjectEmployeeDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -129,5 +130,14 @@ public class ProjectController {
     public ResponseEntity<Void> removeEmployeeFromProject(@PathVariable Long projectId, @PathVariable Long employeeId){
         service.removeEmployeeFromProject(projectId, employeeId);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/employees")
+    public ResponseEntity<List<EmployeeDto>> getProjectEmployees(
+            @PathVariable Long id) {
+
+        return ResponseEntity.ok(
+                service.findEmployeesByProjectId(id)
+        );
     }
 }
