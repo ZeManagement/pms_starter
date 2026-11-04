@@ -244,7 +244,7 @@ public class ProjectService {
         }
 
         // prüft ob IDs (falls angegeben) gültig sind
-        List<QualificationDto> qualifications =
+        List<SkillDto> qualifications =
                 externalApiClient.getAllQualifications();
 
         if (dto.employees() != null) {

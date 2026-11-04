@@ -131,6 +131,24 @@ public class ProjectController {
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(
+            summary = "Update project",
+            description = """
+        Updates an existing project by its ID.
+
+        The same business validations as when creating a project
+        are performed before the update. One exception is the
+        ProjectAlreadyExistsException.
+        """
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Project successfully updated"),
+            @ApiResponse(responseCode = "404", description = "Project, employee or qualification not found",
+                    content = @Content(
+                            schema = @Schema(implementation = ProblemDetail.class)
+                    )),
+            @ApiResponse(responseCode = "409", description = "Project name already exists or an employee scheduling conflict was detected")
+    })
     @PutMapping("/{id}")
     public ResponseEntity<ProjectDto> updateProject(
             @PathVariable Long id,
